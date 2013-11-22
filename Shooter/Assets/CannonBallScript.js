@@ -7,10 +7,14 @@ function Update () {
 	transform.Rotate(3, 3, 3);
 }
 
-function OnCollisionEnter(obj : Collision) {  
-    if (obj.gameObject.name == "Enemy(Clone)") {  
-        Destroy(gameObject); 
-    }  else if (obj.gameObject.name == "before") {  
-    	Destroy(gameObject);   
-    }
-}  
+/*function OnCollisionEnter(obj : Collision) {
+	if (obj.gameObject.name == "before") {
+		Destroy(gameObject);	
+	} else if (obj.gameObject.name == "Enemy(Clone)"){
+    	Destroy(gameObject); 
+	} 
+}*/
+
+function OnCollisionEnter() {
+	Destroy(gameObject);
+}
