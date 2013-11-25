@@ -2,33 +2,28 @@
 
 // Playerの移動速度
 var playerSpeed : float;
+//エフェクト
+var eff : Transform;
+var bulletEff : Transform;
+
 function Update () {
 	var x : float = Input.GetAxis("Horizontal");
 	transform.Translate(x * playerSpeed, 0, 0);
 }
 
-// 当たり判定
-/*function OnCollisionEnter(obj : Collision) {   
-    if (obj.gameObject.name == "Bullet(Clone)") {  
-        // 何もしない
-    }  else {
-        Application.LoadLevel("GameOver"); 
-    }
-}*/
-
 function OnCollisionEnter(obj : Collision) {
 	switch (obj.gameObject.name) {
-		case "Enemy(Clone)" : 
-			Application.LoadLevel("GameOver"); 
+		case "Bullet(Clone)" : 
+			Instantiate(bulletEff, transform.position, transform.rotation);
 		break;
-		case "Enemy2(Clone)" : 
-			Application.LoadLevel("GameOver"); 
+		case "Block" : 
+			// 何もしない
 		break;
-		case "Enemy3(Clone)" : 
-			Application.LoadLevel("GameOver"); 
-		break;
-		case "EnemyBullet(Clone)" : 
+		// Enemyに当たった時
+		default : 
+			Instantiate(eff, transform.position, transform.rotation);
 			Application.LoadLevel("GameOver"); 
 		break;
 	}
-} 
+}
+

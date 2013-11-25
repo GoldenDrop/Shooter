@@ -2,6 +2,7 @@
 // 弾速
 var speed : float = 0.3;
 
+
 function Update () {
 	transform.position.z += speed;
 	transform.Rotate(3, 3, 3);
@@ -15,6 +16,6 @@ function Update () {
 	} 
 }*/
 
-function OnCollisionEnter() {
+function OnCollisionEnter(obj : Collision) {
 	Destroy(gameObject);
 }
