@@ -1,8 +1,7 @@
 ﻿#pragma strict
 
-function OnCollisionEnter(obj : Collision) { 
-    if (obj.gameObject.name == "Enemy(Clone)") {  
-    	Application.LoadLevel("GameOver");
-    } 
-}  
+// 当たったオブジェクトを削除
+function OnCollisionEnter(obj : Collision) {
+	Destroy(obj.gameObject);
+}
 
