@@ -9,6 +9,12 @@ private var bullet : int = 100;
 var scoreStyle : GUIStyle;
 var bulletStyle : GUIStyle;
 
+// インスタンスが生成されて場に出てくるときに実行される
+function Awake() {
+	//次のシーンを読み込むときに、自分自身を破壊しない
+    DontDestroyOnLoad(this);
+}
+
 function GetScore (s : int) {
 	score += s;
 }
@@ -27,16 +33,16 @@ function OnGUI() {
     }
 }
 
-// インスタンスが生成されて場に出てくるときに実行される
-function Awake() {
-	//次のシーンを読み込むときに、自分自身を破壊しない
-    DontDestroyOnLoad(this);
-}
-
 function Update() {
 	//　Mainシーンにいるなら
     if(Application.loadedLevelName == "Main"){
     	// スコアを移す
         staticScore = score;
     }
+}
+
+// 自身を削除する
+function destroyMe() {
+	Debug.Log("Destroy me");
+	Destroy(gameObject);
 }

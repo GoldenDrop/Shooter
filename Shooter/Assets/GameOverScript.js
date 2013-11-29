@@ -10,10 +10,13 @@ private var message : String;
 var scoreStyle : GUIStyle;
 var gameOverStyle : GUIStyle;
 
-function Awake() {
+function Start() {
 	// setterでスコアを移す
 	setScore(GameController.staticScore);
+	// GameControllerオブジェクトを削除するメソッドを呼ぶ
+	GameObject.FindWithTag("GameController").SendMessage("destroyMe");
 }
+
 
 function OnGUI() {
 	GUI.Label(Rect(Screen.width / 2 - 105, Screen.height / 2 - 90, 100, 30),"Game Over", gameOverStyle);
@@ -25,18 +28,17 @@ function OnGUI() {
 	// それを格納する
 	nameText = GUI.TextField(Rect(Screen.width / 2 - 20, Screen.height / 2 + 10, 100, 25),nameText, 10);
 	// Entryボタンを押したとき
-	if(GUI.Button(Rect(Screen.width / 2 - 90, Screen.height / 2 + 50, 80, 25), "Entry")) {
+	if(GUI.Button(Rect(Screen.width / 2 - 90, Screen.height / 2 + 50, 80, 25), "ENTRY")) {
 		if (nameText == ""){// 名前が空白ならば
 			messageSend("noName");
 		} else {
 			messageSend("entry");
 			postScore();
-			//後でランキングに変更
-			Application.LoadLevel("Title"); 
+			Application.LoadLevel("Ranking"); 
 		}
 	}
 	// Quitボタンを押したとき
-	if(GUI.Button(Rect(Screen.width / 2 + 10, Screen.height / 2 + 50, 80, 25), "Quit")) {
+	if(GUI.Button(Rect(Screen.width / 2 + 10, Screen.height / 2 + 50, 80, 25), "QUIT")) {
 		Debug.Log("登録しない");
 		//タイトルシーンへ移動
 		Application.LoadLevel("Title"); 
@@ -47,6 +49,7 @@ function OnGUI() {
 function setScore(s : int) {
 	score = s;
 }
+
 
 // サーバーにスコアを送る
 function postScore() {
